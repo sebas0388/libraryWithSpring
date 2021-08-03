@@ -39,7 +39,29 @@ public class bookController {
 	}	
 	
 	@DeleteMapping(path="/{id}")
-		public Optional<bookModel> deleteBook(@PathVariable("id") Long id) {
+	public Optional<bookModel> deleteBook(@PathVariable("id") Long id) {
 		return _bookService.deleteBook(id);		
 	}
+		
+	@PostMapping(path="/desactivated/{id}")
+	public String desactivatedbook(@PathVariable("id") Long id) {
+			boolean b = _bookService.desactivatedbook(id);
+			
+			if(b) {
+				return "Se desactivo el libro seleccionado";
+			}else {
+				return "Error al desactivar el libro";
+			}
+	}
+	
+	@PostMapping(path="/actived/{id}")
+    public String activedbook(@PathVariable("id") Long id) {
+				boolean b = _bookService.activedbook(id);
+				
+				if(b) {
+					return "El libro seleccionado está disponible para la venta";
+				}else {
+					return "Error al activar el libro seleccionado para la venta";
+				}
+			}
  }

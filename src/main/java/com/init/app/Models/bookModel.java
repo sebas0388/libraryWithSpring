@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table (name = "books")
@@ -26,9 +26,9 @@ public class bookModel {
 	int stock;
 	boolean active;
 	
-	@ManyToOne
-	@JoinColumn(name = "id")
-	@JsonBackReference
+	@ManyToOne()
+	@JoinColumn(name = "author_id")
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	
 	private authorModel author;
 	
@@ -86,7 +86,7 @@ public class bookModel {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	public boolean isActive() {
+	public boolean getActive() {
 		return active;
 	}
 	public void setActive(boolean active) {
